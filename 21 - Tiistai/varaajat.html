@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Varaajat</title>
+    <script defer src="./node_modules/axios/dist/axios.min.js"></script>
+    <script defer src="nav.js"></script>
+    <script defer src="varaajat.js"></script>
+</head>
+<body>
+    <header id="nav-container"></header>
+    <main>
+    <h3>Varaajien tiedot</h1>
+    <button onclick="getAll()">Hae varaajat</button>
+    <div id="varaajat-table-container"></div>
+    <form id="varaajat-form" onsubmit="createName(event);">
+        <h3>Rekisteröi uusi varaaja</h3>
+        <label for="name">Varaajan nimi: </label>
+        <input type="text" id="name" name="name" require>
+        <input type="submit">
+    </form>
+    </main>
+    <footer></footer>
+</body>
+</html>

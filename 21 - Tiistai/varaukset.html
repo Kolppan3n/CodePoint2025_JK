@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Varaukset</title>
+    <script defer src="./node_modules/axios/dist/axios.min.js"></script>
+    <script defer src="nav.js"></script>
+    <script defer src="varaukset.js"></script>
+</head>
+<body>
+    <header id="nav-container"></header>
+    <main>
+    <h3>Varaukset</h1>
+    <button onclick="getAll()">Hae varaukset</button>
+    <div id="varaukset-table-container"></div>
+    <form id="varaukset-form" onsubmit="createName(event);">
+        <h3>Tee uusi varaus</h3>
+        <label for="tila">Tilan id: </label>
+        <input type="text" id="tila" name="tila" require>
+        <br>
+        <label for="varaaja">Varaajan id: </label>
+        <input type="text" id="varaaja" name="varaaja" require>
+        <br>
+        <label for="varauspaiva">Varauspäiva: </label>
+        <input type="date" id="varauspaiva" name="varauspaiva" require>
+        <br>
+        <input type="submit">
+    </form>
+    </main>
+    <footer></footer>
+</body>
+</html>

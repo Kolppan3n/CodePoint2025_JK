@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <title>{{ otsikko }}</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <header>
+    </header>
+    <main>
+        <table id="table-varaukset">
+                <tr>
+                    <th>ID</th>
+                    <th>Tila</th>
+                    <th>Varaaja</th>
+                    <th>Päivämäärä</th>
+                </tr>
+                {% for varaus in varaukset %}
+                <tr>
+                    <td>{{ varaus.id }}</td>
+                    <td>{{ varaus.tila }}</td>
+                    <td>{{ varaus.varaaja }}</td>
+                    <td>{{ varaus.varauspaiva }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+        <table id="table-varaajat">
+                <tr>
+                    <th>ID</th>
+                    <th>Nimi</th>
+                </tr>
+                {% for varaaja in varaajat %}
+                <tr>
+                    <td>{{ varaaja.id }}</td>
+                    <td>{{ varaaja.nimi }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+        <table id="table-tilat">
+                <tr>
+                    <th>ID</th>
+                    <th>Nimi</th>
+                </tr>
+                {% for tila in tilat %}
+                <tr>
+                    <td>{{ tila.id }}</td>
+                    <td>{{ tila.nimi }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+    </main>
+    <footer></footer>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+Python -m venv .venv		//Luo python virtuaaliserverin
+venv\Scripts\activate		//Käynnistää virtuaaliserverin
+
+npm create vite@latest		//Luo uuden react-projektin
+
+npm i react-router		//Asentaa react-router projektiin
+npm i react-hook-form		//Asentaa react-hook-form projektiin
+
+npm run dev			//Käynnistää react projektin virtuaali serverissä
+
+https://tailwindcss.com/docs/installation/using-vite

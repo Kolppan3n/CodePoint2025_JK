@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script defer src="./node_modules/axios/dist/axios.min.js"></script>
+    <script defer src="nav.js"></script>
+    <script defer src="login.js"></script>
+</head>
+<body>
+    <header id="nav-container"></header>
+    <main>
+        <form id="login-form" onsubmit="login(event);">
+            <h3>KIRJAUDU TAI KUOLE</h1>
+            <input type="text" id="username" name="username" placeholder="Käyttäjätunnus" required/>
+            <input type="password" id="password" name="password" placeholder="Salasana" required/>
+            <input type="submit" value="Lähetä"/>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>

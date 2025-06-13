@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+  background: deeppink;
+  color: white;
+  text-align: center;
+  height: 40px;
+}
+
+.splitter {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.outer {
+    background: brown;
+}
+
+main {
+    display: flex;
+    background: goldenrod;
+    flex: 1;
+    padding: 40px 20px 20px;
+    overflow-y: auto;
+}
+
+main article {
+  background: yellowgreen;
+  flex: 1;
+}
+
+.inner{
+  background: mediumturquoise;
+  flex: 1;
+}
+
+
+footer {
+  background: royalblue;
+  color: white;
+  text-align: center;
+  height: 40px;
+}
