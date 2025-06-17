@@ -25,6 +25,10 @@ SECRET_KEY = 'django-insecure-0o9wju$l$i9a6wl--*hv27(ag9jgpb3k@n9er593m_8f#&gbc=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Configuration for CORS Headers
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 ALLOWED_HOSTS = []
 
 
@@ -37,15 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'tilat',
     'varaajat',
     'varaukset',
-    'kayttajat',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,6 +110,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Setting authentication mehtod to Token
+# https://github.com/codepointtku/kevat-2025-tehtavat/blob/main/viikko-22.md
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ),
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -120,6 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
