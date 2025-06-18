@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import type { ApiResponse } from "../utils/Types";
+import { useAuth } from "../utils/AuthProvider";
 
-export const useTableData = (
-  resource: "Tilat" | "Varaajat" | "Varaukset",
-) => {
+export const useTableData = (resource: "Tilat" | "Varaajat" | "Varaukset") => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const { accessToken } = useAuth();
 
   const baseUrl = "http://localhost:8000/api";
 
@@ -21,10 +21,10 @@ export const useTableData = (
         throw new Error("Network response was not ok.");
       }
 
-      const resJson: ApiResponse = await response.json();
+      const resJson = await response.json();
 
-      if (resJson.data.length !== 0) {
-        setData(resJson.data);
+      if (resJson.length !== 0) {
+        setData(resJson);
       } else {
         throw new Error("The Database was empty");
       }
@@ -36,19 +36,19 @@ export const useTableData = (
   }, []);
 
   const deleteRow = async (targetId: number) => {
-    const token = localStorage.getItem("authToken");
-    const url = `${baseUrl}/${resource.toLocaleLowerCase()}/${targetId}`;
-    console.log(url)
+    const url = `${baseUrl}/${resource.toLocaleLowerCase()}/${targetId}/`;
+    console.log(url);
     try {
       const response = await fetch(url, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
-      const resJson: ApiResponse = await response.json();
-      console.log(resJson);
+      console.log("response", {
+        message: `${resource} with id: ${targetId} was deleted successfully`,
+      });
       fetchTable();
     } catch (error: any) {
       setError(error.message);
@@ -56,21 +56,18 @@ export const useTableData = (
   };
 
   const createRow = async (postData: {}) => {
-    console.log("Creating row with data:", postData);
-    const baseUrl = "http://localhost:8000/api";
-    const url = `${baseUrl}/${resource.toLocaleLowerCase()}`;
-    const token = localStorage.getItem("authToken");
+    const url = `${baseUrl}/${resource.toLocaleLowerCase()}/`;
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(postData),
       });
-      const resJson: ApiResponse = await response.json();
-      console.log(resJson);
+      const resJson = await response.json();
+      console.log("resJson", resJson);
       fetchTable();
     } catch (error: any) {
       setError(error.message);

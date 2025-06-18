@@ -4,4 +4,4 @@ from rest_framework import viewsets
 
 class VarausViewSet(viewsets.ModelViewSet):
     queryset = Varaus.objects.all()
-    serializer_class = VarausSerializer
+    serializer_class = VarausSerializerName

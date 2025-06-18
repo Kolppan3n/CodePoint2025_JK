@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-import type { Kayttaja, LoginResponse } from "./Types";
+import type { LoginResponse } from "./Types";
 
 // Määritellään kontekstin tyyppi
 interface AuthContextType {
   isAuthenticated: boolean;
+  accessToken: string | null;
   loading: boolean;
   error: string | null;
   login: (loginData: {}) => void;
@@ -16,12 +17,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [refreshToken, setRefreshToken] = useState<string | null>(localStorage.getItem("refreshToken"));
-  const [accessToken, setAccessToken] = useState<string | null>(localStorage.getItem("accessToken"));
+  const [refreshToken, setRefreshToken] = useState<string | null>(
+    localStorage.getItem("refreshToken")
+  );
+  const [accessToken, setAccessToken] = useState<string | null>(
+    localStorage.getItem("accessToken")
+  );
 
   const logout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userData");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
     setRefreshToken(null);
     setAccessToken(null);
   };
@@ -55,7 +60,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       //Tallennetaan käyttöoikeusavain contextiin ja localStorageen
       localStorage.setItem("accessToken", accessToken);
       setAccessToken(accessToken);
-
     } catch (error: any) {
       setError(error.message);
       throw error; // Heitetään virhe edelleen, jotta se voidaan käsitellä kutsujassa
@@ -68,7 +72,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, loading, error, login, logout }}
+      value={{ isAuthenticated, accessToken, loading, error, login, logout }}
     >
       {children}
     </AuthContext.Provider>
